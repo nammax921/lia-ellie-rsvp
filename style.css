@@ -20,6 +20,82 @@
 /* Ensure the HTML `hidden` attribute always wins over the display rules below. */
 [hidden] { display: none !important; }
 
+/* ---- Falling cherry-blossom petals ---- */
+.petals {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 60;
+}
+.petal {
+  position: absolute;
+  top: -6vh;
+  will-change: transform;
+  animation: petal-drop linear infinite;
+}
+.petal-inner {
+  display: block;
+  border-radius: 100% 0 100% 0;
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.5);
+  will-change: transform;
+  animation: petal-sway ease-in-out infinite alternate;
+}
+@keyframes petal-drop {
+  from { transform: translateY(-6vh); }
+  to   { transform: translateY(112vh); }
+}
+@keyframes petal-sway {
+  from { transform: translateX(-11px) rotate(-25deg); }
+  to   { transform: translateX(11px) rotate(210deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .petals { display: none; }
+}
+
+/* ---- Music button ---- */
+.music-btn {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 70;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(120, 90, 90, 0.12);
+  box-shadow: 0 2px 8px rgba(120, 90, 90, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.music-icon {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 14px;
+}
+.music-icon i {
+  width: 3px;
+  height: 6px;
+  background: var(--sage-dark);
+  border-radius: 2px;
+}
+.music-btn.playing .music-icon i {
+  animation: eq 0.9s ease-in-out infinite;
+}
+.music-btn.playing .music-icon i:nth-child(2) { animation-delay: 0.25s; }
+.music-btn.playing .music-icon i:nth-child(3) { animation-delay: 0.5s; }
+@keyframes eq {
+  0%, 100% { height: 5px; }
+  50% { height: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .music-btn.playing .music-icon i { animation: none; height: 9px; }
+}
+
 html, body {
   max-width: 100%;
   overflow-x: hidden;
@@ -194,7 +270,7 @@ body {
   justify-content: center;
 }
 
-.photo-hero { aspect-ratio: 16 / 10; margin-bottom: 8px; }
+.photo-hero { aspect-ratio: 4 / 5; margin-bottom: 8px; }
 .photo-ph { font-size: 32px; opacity: 0.5; }
 
 .photo-slot img {
@@ -205,13 +281,20 @@ body {
   object-fit: cover;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+/* ---- Invitation message ---- */
+.message { margin: 8px 0 24px; }
+.message .section-title { margin-bottom: 16px; }
+.message-photo {
+  aspect-ratio: 4 / 3;
+  margin: 0 0 16px;
 }
-.gallery .photo-slot { aspect-ratio: 1 / 1; }
-.gallery .photo-ph { font-size: 22px; }
+.message-text {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-light);
+  margin: 0;
+}
 
 /* ---- Big date + calendar ---- */
 .date-block { text-align: center; margin: 12px 0 26px; }
@@ -296,18 +379,47 @@ body {
 
 .timeline { position: relative; }
 
+/* central vertical line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--pink-light);
+}
+
 .tl-item {
   display: grid;
-  grid-template-columns: 60px 1fr;
-  gap: 14px;
-  padding-bottom: 6px;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 22px;
+  align-items: center;
+  position: relative;
+  margin-bottom: 22px;
+}
+
+/* dot on the central line */
+.tl-item::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--pink-dark);
+  box-shadow: 0 0 0 3px #fff;
+  z-index: 2;
 }
 
 .tl-media {
   position: relative;
-  width: 60px;
-  height: 60px;
-  border-radius: 12px;
+  width: 92px;
+  height: 92px;
+  border-radius: 14px;
   overflow: hidden;
   background: var(--sage-light);
   display: flex;
@@ -315,7 +427,7 @@ body {
   justify-content: center;
 }
 
-.tl-ph { font-size: 22px; opacity: 0.5; }
+.tl-ph { font-size: 26px; opacity: 0.5; }
 
 .tl-media img {
   position: absolute;
@@ -325,26 +437,13 @@ body {
   object-fit: cover;
 }
 
-.tl-body {
-  position: relative;
-  padding-left: 18px;
-  padding-bottom: 20px;
-  border-left: 2px solid var(--pink-light);
-}
+/* alternate sides: odd = photo left / text right, even = text left / photo right */
+.tl-item:nth-child(odd) .tl-media { grid-column: 1; justify-self: start; }
+.tl-item:nth-child(odd) .tl-body { grid-column: 2; }
+.tl-item:nth-child(even) .tl-media { grid-column: 2; justify-self: end; }
+.tl-item:nth-child(even) .tl-body { grid-column: 1; }
 
-.tl-item:last-child .tl-body { border-left-color: transparent; }
-
-.tl-body::before {
-  content: "";
-  position: absolute;
-  left: -7px;
-  top: 3px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--pink-dark);
-  box-shadow: 0 0 0 3px #fff;
-}
+.tl-body { text-align: left; }
 
 .tl-date {
   font-size: 12px;

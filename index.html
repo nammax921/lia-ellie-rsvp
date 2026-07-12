@@ -3,13 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Invitation — [Baby's Name]'s First Birthday</title>
+<title>Lia & Ellie — Первый день рождения</title>
+<meta name="description" content="Приглашаем вас на первый день рождения Lia & Ellie!">
+<meta property="og:title" content="Lia & Ellie — Первый день рождения">
+<meta property="og:description" content="Приглашаем вас на первый день рождения!">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<button class="music-btn" id="music-btn" type="button" aria-label="Музыка" hidden>
+  <span class="music-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+</button>
+<audio id="bg-music" src="music/song.mp3" loop preload="auto"></audio>
 
 <div class="page">
 
@@ -32,27 +43,23 @@
       <button type="button" class="cta-rsvp" id="cta-rsvp" data-i18n="rsvp_cta">RSVP now</button>
     </header>
 
-    <!-- PHOTOS: drop files into the photos/ folder (hero.jpg, g1.jpg, g2.jpg, g3.jpg).
-         Missing files fall back to a styled placeholder automatically. -->
+    <!-- MAIN PHOTO: drop photos/hero.jpg into the photos/ folder.
+         A missing file falls back to a styled placeholder automatically. -->
     <section class="photos reveal">
       <div class="photo-slot photo-hero">
         <div class="photo-ph" aria-hidden="true">🧸</div>
         <img src="photos/hero.jpg" alt="" loading="lazy" onerror="this.remove()">
       </div>
-      <div class="gallery">
-        <div class="photo-slot">
-          <div class="photo-ph" aria-hidden="true">📷</div>
-          <img src="photos/g1.jpg" alt="" loading="lazy" onerror="this.remove()">
-        </div>
-        <div class="photo-slot">
-          <div class="photo-ph" aria-hidden="true">📷</div>
-          <img src="photos/g2.jpg" alt="" loading="lazy" onerror="this.remove()">
-        </div>
-        <div class="photo-slot">
-          <div class="photo-ph" aria-hidden="true">📷</div>
-          <img src="photos/g3.jpg" alt="" loading="lazy" onerror="this.remove()">
-        </div>
+    </section>
+
+    <!-- INVITATION MESSAGE: title + a second photo (photos/message.jpg) + text -->
+    <section class="message reveal">
+      <h2 class="section-title" data-i18n="message.title">Приглашение</h2>
+      <div class="photo-slot message-photo">
+        <div class="photo-ph" aria-hidden="true">🧸</div>
+        <img src="photos/message.jpg" alt="" loading="lazy" onerror="this.remove()">
       </div>
+      <p class="message-text" data-i18n="message.text">Приглашаем вас на праздник!</p>
     </section>
 
     <!-- DATE + CALENDAR (numbers come from CONFIG.EVENT_DATE in script.js) -->

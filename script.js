@@ -5,7 +5,7 @@ const CONFIG = {
   SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxKOpxNO7Yu00MLrFN8JiGWN7OcPpDbh8gFpOKEh-nZ-kKmmSNfPbgL8xsqhjMVxSlGzw/exec",
   // Optional: a 2GIS link to the venue (open 2gis.kg, find the place, Share → copy
   // the link). Leave as-is to hide the "Open in 2GIS" button.
-  MAP_URL: "PASTE_YOUR_2GIS_LINK_HERE",
+  MAP_URL: "https://2gis.kg/bishkek/search/Diyar%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D1%8B%20327",
   // The event date. Set these numbers to your real date; the month + weekday NAMES
   // are shown from translations.js, so the calendar + big date update automatically.
   // month is 1-12 (e.g. 8 = August).
@@ -312,6 +312,74 @@ function setupCopyAddress() {
   });
 }
 
+// ---- BACKGROUND MUSIC ----
+// The button only appears once the audio file (music/song.mp3) actually loads,
+// so there's no broken control before you add a track. Browsers block autoplay
+// with sound, so we also start it on the guest's first tap anywhere on the page.
+function setupMusic() {
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-btn");
+  if (!audio || !btn) return;
+
+  // Show the control only once a real audio file has loaded.
+  audio.addEventListener("canplay", () => { btn.hidden = false; }, { once: true });
+  audio.addEventListener("error", () => { btn.hidden = true; });
+
+  const sync = () => btn.classList.toggle("playing", !audio.paused);
+  audio.addEventListener("play", sync);
+  audio.addEventListener("pause", sync);
+
+  // Autoplay with sound is blocked until the guest interacts, so kick it off on
+  // their first tap anywhere (except the button, which manages itself).
+  function startOnce(e) {
+    if (btn.contains(e.target)) return;
+    audio.play().catch(() => {});
+    stopAutoStart();
+  }
+  function stopAutoStart() {
+    document.removeEventListener("pointerdown", startOnce);
+  }
+  document.addEventListener("pointerdown", startOnce);
+
+  // Once the guest uses the button, they're in control — stop auto-starting.
+  btn.addEventListener("click", () => {
+    stopAutoStart();
+    if (audio.paused) audio.play().catch(() => {});
+    else audio.pause();
+  });
+}
+
+// ---- FALLING CHERRY-BLOSSOM PETALS ----
+function setupPetals() {
+  const wrap = document.getElementById("petals");
+  if (!wrap) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const colors = ["#f6c9d4", "#f3d9e0", "#efb6c4", "#fbe6ea", "#f7dfe4"];
+  const COUNT = 14;
+
+  for (let i = 0; i < COUNT; i++) {
+    const petal = document.createElement("span");
+    petal.className = "petal";
+    petal.style.left = (Math.random() * 100).toFixed(2) + "%";
+    petal.style.animationDuration = (7 + Math.random() * 9).toFixed(1) + "s";
+    // negative delay so petals are already spread down the screen on load
+    petal.style.animationDelay = (-Math.random() * 12).toFixed(1) + "s";
+
+    const inner = document.createElement("span");
+    inner.className = "petal-inner";
+    const size = (8 + Math.random() * 8).toFixed(1);
+    inner.style.width = size + "px";
+    inner.style.height = size + "px";
+    inner.style.background = colors[i % colors.length];
+    inner.style.opacity = (0.55 + Math.random() * 0.35).toFixed(2);
+    inner.style.animationDuration = (2 + Math.random() * 3).toFixed(1) + "s";
+
+    petal.appendChild(inner);
+    wrap.appendChild(petal);
+  }
+}
+
 // ---- SCROLL REVEAL ----
 function setupReveal() {
   const els = document.querySelectorAll(".reveal");
@@ -342,6 +410,8 @@ function setupReveal() {
   setupMapButton();
   setupCopyAddress();
   setupCTA();
+  setupMusic();
+  setupPetals();
   setupReveal();
 
   if (guestToken) {
