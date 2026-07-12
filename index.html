@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Invitation — [Baby's Name]'s First Birthday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <main class="card">
+    <div class="teddy-ear teddy-ear-left" aria-hidden="true"></div>
+    <div class="teddy-ear teddy-ear-right" aria-hidden="true"></div>
+
+    <header class="header reveal">
+      <div class="hero" aria-hidden="true">
+        <span class="confetti c1"></span>
+        <span class="confetti c2"></span>
+        <span class="confetti c3"></span>
+        <span class="confetti c4"></span>
+        <div class="hero-arch"><span class="hero-teddy">🧸</span></div>
+      </div>
+      <p class="flourish" data-i18n="header.flourish">You're Invited</p>
+      <h1 data-i18n="header.title">[Baby's Name]</h1>
+      <p class="subtitle" data-i18n="header.subtitle">First Birthday</p>
+      <p class="intro" data-i18n="header.intro">We'd love for you to celebrate this special day with us!</p>
+      <button type="button" class="cta-rsvp" id="cta-rsvp" data-i18n="rsvp_cta">RSVP now</button>
+    </header>
+
+    <!-- PHOTOS: drop files into the photos/ folder (hero.jpg, g1.jpg, g2.jpg, g3.jpg).
+         Missing files fall back to a styled placeholder automatically. -->
+    <section class="photos reveal">
+      <div class="photo-slot photo-hero">
+        <div class="photo-ph" aria-hidden="true">🧸</div>
+        <img src="photos/hero.jpg" alt="" loading="lazy" onerror="this.remove()">
+      </div>
+      <div class="gallery">
+        <div class="photo-slot">
+          <div class="photo-ph" aria-hidden="true">📷</div>
+          <img src="photos/g1.jpg" alt="" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="photo-slot">
+          <div class="photo-ph" aria-hidden="true">📷</div>
+          <img src="photos/g2.jpg" alt="" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="photo-slot">
+          <div class="photo-ph" aria-hidden="true">📷</div>
+          <img src="photos/g3.jpg" alt="" loading="lazy" onerror="this.remove()">
+        </div>
+      </div>
+    </section>
+
+    <!-- DATE + CALENDAR (numbers come from CONFIG.EVENT_DATE in script.js) -->
+    <section class="date-block reveal">
+      <p class="date-month" id="date-month"></p>
+      <p class="date-day" id="date-day"></p>
+      <p class="date-year" id="date-year"></p>
+      <div class="calendar" aria-hidden="true">
+        <div class="cal-weekdays" id="cal-weekdays"></div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+      <p class="date-time" data-i18n="event.time">[Time]</p>
+    </section>
+
+    <!-- TIMELINE (items rendered from translations; photos in photos/t1.jpg … t5.jpg) -->
+    <section class="timeline-section">
+      <h2 class="section-title reveal" data-i18n="timeline.title">Our Baby's Story</h2>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section class="event reveal">
+      <div class="event-row">
+        <span class="event-icon" aria-hidden="true">📍</span>
+        <div class="event-text">
+          <span class="event-label" data-i18n="event.whereLabel">Venue</span>
+          <span class="event-value" data-i18n="event.venue">[Venue name]</span>
+          <span class="event-sub" data-i18n="event.address">[Address]</span>
+        </div>
+      </div>
+      <div class="event-actions">
+        <a class="map-btn" id="map-btn" href="#" target="_blank" rel="noopener" data-i18n="event.mapButton" hidden>Open in 2GIS</a>
+        <button type="button" class="copy-btn" id="copy-addr-btn" data-i18n="event.copyAddress">Copy address</button>
+      </div>
+    </section>
+
+    <section class="rsvp reveal" id="rsvp-section">
+      <div class="rsvp-loading" id="rsvp-loading" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <span data-i18n="rsvp.loading">Loading your invitation…</span>
+      </div>
+
+      <p class="rsvp-note" id="rsvp-message" hidden></p>
+
+      <div class="rsvp-controls" id="rsvp-controls" hidden>
+        <p class="rsvp-already" id="rsvp-already" hidden></p>
+        <p class="rsvp-greeting" id="rsvp-greeting"></p>
+        <p class="rsvp-question" data-i18n="rsvp.question">Will you be able to join us?</p>
+        <div class="rsvp-buttons">
+          <button type="button" class="rsvp-btn rsvp-yes" data-value="yes">
+            <span data-i18n="rsvp.yes">Yes, we'll be there</span>
+          </button>
+          <button type="button" class="rsvp-btn rsvp-no" data-value="no">
+            <span data-i18n="rsvp.no">Sorry, we can't make it</span>
+          </button>
+        </div>
+        <p class="field-error" id="rsvp-error" data-i18n="error.submit" hidden>Something went wrong.</p>
+      </div>
+    </section>
+
+    <div class="confirmation" id="confirmation" hidden>
+      <div class="teddy-emoji" aria-hidden="true">🧸</div>
+      <h2 data-i18n="confirmation.title">Thank you!</h2>
+      <p id="confirmation-message"></p>
+    </div>
+
+  </main>
+</div>
+
+<script src="translations.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
