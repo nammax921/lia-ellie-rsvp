@@ -207,6 +207,52 @@ body {
 .confetti.c3 { right: 36%; top: 2px; background: var(--terracotta); border-radius: 50%; animation-delay: 0.9s; }
 .confetti.c4 { right: 22%; top: 14px; background: var(--pink); transform: rotate(24deg); animation-delay: 0.3s; }
 
+/* ---- Botanical + birthday decorations ---- */
+.hero-arch { position: relative; z-index: 1; }
+.euc {
+  position: absolute;
+  bottom: -4px;
+  width: 44px;
+  height: auto;
+  z-index: 0;
+  opacity: 0.92;
+  pointer-events: none;
+}
+.euc-left { left: 2px; }
+.euc-right { right: 2px; transform: scaleX(-1); }
+.bloom {
+  position: absolute;
+  bottom: 4px;
+  width: 22px;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+}
+.bloom-left { left: 18px; }
+.bloom-right { right: 18px; bottom: 12px; }
+
+.festive-deco {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  pointer-events: none;
+}
+.festive-deco .balloon { width: 32px; height: auto; }
+.festive-deco .gift { width: 44px; height: auto; }
+.balloon-a { animation: floaty 4s ease-in-out infinite; }
+.balloon-b { animation: floaty 4.8s ease-in-out infinite; animation-delay: 0.4s; }
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 18px;
+  margin: 9px auto 0;
+  background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2020'%3E%3Cline%20x1='20'%20y1='10'%20x2='80'%20y2='10'%20stroke='%23a7bd93'%20stroke-width='1.2'/%3E%3Ccircle%20cx='50'%20cy='10'%20r='3'%20fill='%23d89aa0'/%3E%3Cellipse%20cx='34'%20cy='6'%20rx='6'%20ry='2.6'%20fill='%239caf88'%20transform='rotate(-22%2034%206)'/%3E%3Cellipse%20cx='34'%20cy='14'%20rx='6'%20ry='2.6'%20fill='%23a7bd93'%20transform='rotate(22%2034%2014)'/%3E%3Cellipse%20cx='66'%20cy='6'%20rx='6'%20ry='2.6'%20fill='%239caf88'%20transform='rotate(22%2066%206)'/%3E%3Cellipse%20cx='66'%20cy='14'%20rx='6'%20ry='2.6'%20fill='%23a7bd93'%20transform='rotate(-22%2066%2014)'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
 .flourish {
   font-family: var(--script);
   font-size: 32px;
@@ -672,7 +718,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; transition: none; }
-  .spinner, .hero-teddy, .confetti, .cta-rsvp { animation: none; }
+  .spinner, .hero-teddy, .confetti, .cta-rsvp, .balloon-a, .balloon-b { animation: none; }
 }
 
 @media (min-width: 380px) {
