@@ -296,23 +296,6 @@ function setupMapButton() {
   }
 }
 
-// ---- COPY ADDRESS ----
-function setupCopyAddress() {
-  const btn = document.getElementById("copy-addr-btn");
-  if (!btn) return;
-  btn.addEventListener("click", async () => {
-    const addrEl = document.querySelector('[data-i18n="event.address"]');
-    const addr = addrEl ? addrEl.textContent.trim() : "";
-    try {
-      await navigator.clipboard.writeText(addr);
-    } catch (err) {
-      // Clipboard API can be unavailable (e.g. non-HTTPS); fail quietly.
-    }
-    btn.textContent = t("event.copied");
-    setTimeout(() => { btn.textContent = t("event.copyAddress"); }, 1500);
-  });
-}
-
 // ---- BACKGROUND MUSIC ----
 // The button only appears once the audio file (music/song.mp3) actually loads,
 // so there's no broken control before you add a track. Browsers block autoplay
@@ -416,7 +399,6 @@ function setupReveal() {
 
   renderText();
   setupMapButton();
-  setupCopyAddress();
   setupCTA();
   setupMusic();
   setupPetals();

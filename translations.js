@@ -34,9 +34,7 @@ const TRANSLATIONS = {
       whereLabel: "Место проведения",
       venue: "Ресторан «Diyar»",
       address: "пр. Победы, 327, Бишкек, Кыргызстан",
-      mapButton: "Открыть в 2ГИС",
-      copyAddress: "Копировать адрес",
-      copied: "Скопировано ✓"
+      mapButton: "Открыть в 2ГИС"
     },
     rsvp: {
       loading: "Загружаем ваше приглашение…",
