@@ -325,11 +325,21 @@ body {
   margin: 4px 0 2px;
 }
 
-.date-when {
-  font-size: 15px;
-  letter-spacing: 0.12em;
+.date-when { margin: 4px 0 0; }
+.dw-year {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 0.2em;
   color: var(--text-light);
-  margin: 2px 0 0;
+}
+.dw-time {
+  display: block;
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 600;
+  color: var(--terracotta);
+  letter-spacing: 0.02em;
+  margin-top: 4px;
 }
 
 .calendar {
@@ -474,6 +484,15 @@ body {
   border-radius: 14px;
   padding: 16px;
   margin-bottom: 22px;
+}
+
+.venue-logo {
+  display: block;
+  max-height: 56px;
+  width: auto;
+  max-width: 62%;
+  margin: 2px auto 14px;
+  mix-blend-mode: multiply;
 }
 
 .event-row { display: flex; gap: 12px; align-items: flex-start; }

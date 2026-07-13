@@ -32,7 +32,7 @@ const TRANSLATIONS = {
     event: {
       time: "17:00",
       whereLabel: "Место проведения",
-      venue: "Ресторан «Diyar»",
+      venue: "Ресторан «Дияр»",
       address: "пр. Победы, 327, Бишкек, Кыргызстан",
       mapButton: "Открыть в 2ГИС"
     },

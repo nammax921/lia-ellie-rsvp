@@ -77,7 +77,11 @@ function updateDateText() {
   if (monthEl) monthEl.textContent = Array.isArray(months) ? months[d.month - 1] : "";
   if (dayEl) dayEl.textContent = d.day;
   // date and time shown together, e.g. "2026 · 17:00"
-  if (whenEl) whenEl.textContent = d.year + " · " + t("event.time");
+  if (whenEl) {
+    whenEl.innerHTML =
+      '<span class="dw-year">' + d.year + '</span>' +
+      '<span class="dw-time">' + t("event.time") + '</span>';
+  }
 }
 
 function updateCalendarHeaders() {
