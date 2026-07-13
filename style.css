@@ -30,8 +30,8 @@
 }
 .petal {
   position: absolute;
-  top: -8vh;
-  will-change: transform;
+  top: -10vh;
+  will-change: transform, filter;
   animation: petal-drop linear infinite;
 }
 .petal-inner {
@@ -43,18 +43,18 @@
   will-change: transform;
   animation: petal-flutter ease-in-out infinite;
 }
-/* gentle S-curve descent */
+/* gentle per-petal S-curve descent (horizontal amount = --sway) */
 @keyframes petal-drop {
-  0%   { transform: translate(0, -8vh); }
-  25%  { transform: translate(16px, 22vh); }
-  50%  { transform: translate(-12px, 52vh); }
-  75%  { transform: translate(14px, 82vh); }
-  100% { transform: translate(-6px, 114vh); }
+  0%   { transform: translate(0, -10vh); }
+  25%  { transform: translate(var(--sway, 16px), 24vh); }
+  50%  { transform: translate(calc(var(--sway, 16px) * -0.8), 54vh); }
+  75%  { transform: translate(var(--sway, 16px), 84vh); }
+  100% { transform: translate(calc(var(--sway, 16px) * -0.5), 116vh); }
 }
-/* twirl + flip (scaleX edge-on) like a real petal */
+/* twirl + edge-on flip like a real petal */
 @keyframes petal-flutter {
   0%   { transform: rotate(0deg) scaleX(1); }
-  50%  { transform: rotate(180deg) scaleX(0.35); }
+  50%  { transform: rotate(180deg) scaleX(0.3); }
   100% { transform: rotate(360deg) scaleX(1); }
 }
 @media (prefers-reduced-motion: reduce) {

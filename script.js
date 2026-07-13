@@ -339,32 +339,41 @@ function setupPetals() {
   if (!wrap) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  // soft sakura gradients (lighter tip -> deeper base)
+  // soft sakura gradients (lighter tip -> deeper base), incl. near-white petals
   const grads = [
-    "linear-gradient(160deg, #fdeef2, #f6c1cf)",
-    "linear-gradient(160deg, #fce8ee, #f2aec1)",
-    "linear-gradient(160deg, #fdf2f4, #f8cdd8)",
-    "linear-gradient(160deg, #fbe6ec, #efb8c8)"
+    "linear-gradient(160deg, #ffffff, #f6c8d5)",
+    "linear-gradient(160deg, #fdeef2, #f4bccb)",
+    "linear-gradient(160deg, #fce6ed, #efa9bf)",
+    "linear-gradient(160deg, #fdf3f5, #f8cdd8)",
+    "linear-gradient(160deg, #fbe0e8, #e79bb1)",
+    "linear-gradient(160deg, #fff5f7, #f2b6c6)"
   ];
-  const COUNT = 18;
+  const COUNT = 26;
 
   for (let i = 0; i < COUNT; i++) {
     const petal = document.createElement("span");
     petal.className = "petal";
     petal.style.left = (Math.random() * 100).toFixed(2) + "%";
-    petal.style.animationDuration = (8 + Math.random() * 8).toFixed(1) + "s"; // descent
+    petal.style.animationDuration = (9 + Math.random() * 9).toFixed(1) + "s"; // descent
     // negative delay so petals are already spread down the screen on load
-    petal.style.animationDelay = (-Math.random() * 16).toFixed(1) + "s";
-    const size = 10 + Math.random() * 10; // 10-20px
+    petal.style.animationDelay = (-Math.random() * 18).toFixed(1) + "s";
+    // per-petal horizontal drift amount + direction
+    const sway = (10 + Math.random() * 32) * (Math.random() < 0.5 ? -1 : 1);
+    petal.style.setProperty("--sway", sway.toFixed(0) + "px");
+    const size = 8 + Math.random() * 15; // 8-23px
     petal.style.width = size.toFixed(1) + "px";
     petal.style.height = (size * 1.167).toFixed(1) + "px"; // petal is slightly taller
+    // depth-of-field: some petals softly blurred (nearer / motion blur)
+    if (Math.random() < 0.4) {
+      petal.style.filter = "blur(" + (0.6 + Math.random() * 1.1).toFixed(2) + "px)";
+    }
 
     const inner = document.createElement("span");
     inner.className = "petal-inner";
-    inner.style.background = grads[i % grads.length];
-    inner.style.opacity = (0.5 + Math.random() * 0.4).toFixed(2);
+    inner.style.background = grads[Math.floor(Math.random() * grads.length)];
+    inner.style.opacity = (0.45 + Math.random() * 0.45).toFixed(2);
     inner.style.animationDuration = (2.5 + Math.random() * 3.5).toFixed(1) + "s"; // flutter
-    inner.style.animationDelay = (-Math.random() * 4).toFixed(1) + "s";
+    inner.style.animationDelay = (-Math.random() * 5).toFixed(1) + "s";
 
     petal.appendChild(inner);
     wrap.appendChild(petal);
