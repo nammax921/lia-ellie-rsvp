@@ -293,7 +293,7 @@ body {
 .message { margin: 8px 0 24px; }
 .message .section-title { margin-bottom: 16px; }
 .message-photo {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2;
   margin: 0 0 16px;
 }
 .message-text {
@@ -428,14 +428,15 @@ body {
 
 .tl-media {
   position: relative;
-  width: 92px;
-  height: 92px;
+  width: 96px;
+  height: 96px;
   border-radius: 14px;
   overflow: hidden;
   background: var(--sage-light);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 8px rgba(120, 90, 90, 0.14);
 }
 
 .tl-ph { font-size: 26px; opacity: 0.5; }
@@ -455,6 +456,8 @@ body {
 .tl-item:nth-child(even) .tl-body { grid-column: 1; }
 
 .tl-body { text-align: left; }
+/* mirror text on the even (right-photo) rows so both hug the centre rail */
+.tl-item:nth-child(even) .tl-body { text-align: right; }
 
 .tl-date {
   font-size: 12px;
@@ -615,6 +618,49 @@ body {
 .teddy-emoji { font-size: 40px; line-height: 1; margin-bottom: 8px; }
 .confirmation h2 { font-family: var(--serif); color: var(--sage-dark); margin: 4px 0 12px; }
 .confirmation p { font-size: 15px; color: var(--text); line-height: 1.5; }
+
+/* ---- Clickable photos + lightbox ---- */
+.photo-slot img,
+.tl-media img {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(45, 34, 34, 0.86);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: zoom-out;
+  animation: lightbox-in 0.2s ease;
+}
+@keyframes lightbox-in { from { opacity: 0; } to { opacity: 1; } }
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.45);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
 
 /* ---- Scroll reveal ---- */
 .reveal {

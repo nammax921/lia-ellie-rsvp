@@ -384,6 +384,34 @@ function setupPetals() {
   }
 }
 
+// ---- LIGHTBOX (tap a photo to enlarge) ----
+function setupLightbox() {
+  const box = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-img");
+  if (!box || !img) return;
+
+  function open(src) {
+    img.src = src;
+    box.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  function close() {
+    box.hidden = true;
+    img.src = "";
+    document.body.style.overflow = "";
+  }
+
+  // delegation so it also covers timeline photos built later
+  document.addEventListener("click", (e) => {
+    const clicked = e.target.closest(".photo-slot img, .tl-media img");
+    if (clicked && clicked.getAttribute("src")) open(clicked.src);
+  });
+  box.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !box.hidden) close();
+  });
+}
+
 // ---- SCROLL REVEAL ----
 function setupReveal() {
   const els = document.querySelectorAll(".reveal");
@@ -414,6 +442,7 @@ function setupReveal() {
   setupMapButton();
   setupCTA();
   setupMusic();
+  setupLightbox();
   setupPetals();
   setupReveal();
 
