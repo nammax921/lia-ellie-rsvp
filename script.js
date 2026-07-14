@@ -309,8 +309,13 @@ function setupMusic() {
   const btn = document.getElementById("music-btn");
   if (!audio || !btn) return;
 
-  // Show the control only once a real audio file has loaded.
-  audio.addEventListener("canplay", () => { btn.hidden = false; }, { once: true });
+  // Reveal the control once we know the track exists. Phone browsers often defer
+  // audio loading until the first tap, so we can't wait for 'canplay' — instead
+  // confirm the file is there with a lightweight HEAD request.
+  fetch(audio.getAttribute("src"), { method: "HEAD" })
+    .then((r) => { if (r.ok) btn.hidden = false; })
+    .catch(() => {});
+  audio.addEventListener("canplay", () => { btn.hidden = false; });
   audio.addEventListener("error", () => { btn.hidden = true; });
 
   const sync = () => btn.classList.toggle("playing", !audio.paused);
