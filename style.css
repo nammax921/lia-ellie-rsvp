@@ -1,18 +1,18 @@
 :root {
-  --pink: #e6a9b6;
-  --pink-dark: #d97f97;
-  --pink-light: #f8e6e6;
-  --sage: #9aa889;
-  --sage-dark: #5f7355;
-  --sage-light: #e8eee0;
-  --terracotta: #d97f97;
-  --cream: #fdf6f2;
-  --text: #5c6e4d;
-  --text-light: #7f8b6d;
+  --pink: #e8b4b8;
+  --pink-dark: #d89aa0;
+  --pink-light: #f7e6e8;
+  --sage: #9caf88;
+  --sage-dark: #7d9467;
+  --sage-light: #eaf0e4;
+  --terracotta: #c08457;
+  --cream: #fdf8f5;
+  --text: #4a3f3d;
+  --text-light: #8a7c79;
   --error: #c0554a;
   --radius: 16px;
-  --serif: "Cormorant SC", Georgia, "Times New Roman", serif;
-  --script: "Cormorant SC", Georgia, "Times New Roman", serif;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --script: "Caveat", "Segoe Script", cursive;
 }
 
 * { box-sizing: border-box; }
@@ -111,10 +111,8 @@ html, body {
 
 body {
   margin: 0;
-  font-family: "Cormorant SC", Georgia, "Times New Roman", serif;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  background: linear-gradient(180deg, #f6dfe1 0%, #fbeef0 45%, #fdf6f2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(180deg, var(--pink-light) 0%, var(--cream) 40%);
   color: var(--text);
   min-height: 100vh;
 }
@@ -129,13 +127,7 @@ body {
 /* ---- Card ---- */
 .card {
   position: relative;
-  background:
-    radial-gradient(42% 30% at 8% 5%, rgba(224, 150, 168, 0.24), transparent 62%),
-    radial-gradient(40% 28% at 92% 12%, rgba(150, 165, 135, 0.20), transparent 62%),
-    radial-gradient(46% 34% at 90% 90%, rgba(224, 150, 168, 0.22), transparent 62%),
-    radial-gradient(42% 30% at 6% 93%, rgba(150, 165, 135, 0.18), transparent 62%),
-    radial-gradient(70% 55% at 50% 42%, rgba(255, 253, 250, 0.72), transparent 72%),
-    #fbeef0;
+  background: #fff;
   border-radius: var(--radius);
   padding: 28px 20px 24px;
   box-shadow: 0 8px 24px rgba(120, 90, 90, 0.12);
@@ -239,72 +231,6 @@ body {
 .bloom-left { left: 18px; }
 .bloom-right { right: 18px; bottom: 12px; }
 
-/* corner eucalyptus (clipped by the card edges) */
-.corner-euc {
-  position: absolute;
-  width: 116px;
-  height: auto;
-  z-index: 0;
-  opacity: 0.9;
-  pointer-events: none;
-}
-.corner-tr { top: -16px; right: -16px; transform: scaleX(-1); }
-.corner-bl { bottom: -16px; left: -16px; }
-
-/* bunting garland */
-.bunting {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: -8px 0 2px;
-  position: relative;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* small heart accent */
-.heart {
-  display: block;
-  width: 26px;
-  height: auto;
-  margin: 8px auto 6px;
-}
-
-/* invitation copy */
-.invite {
-  text-align: center;
-  text-transform: uppercase;
-  font-family: var(--serif);
-  margin: 0;
-  line-height: 1.55;
-}
-.invite-1 {
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--sage-dark);
-  margin-top: 4px;
-}
-.invite-2 {
-  font-size: 15px;
-  letter-spacing: 0.16em;
-  color: var(--sage-dark);
-}
-.invite-3 {
-  font-size: 17px;
-  letter-spacing: 0.14em;
-  color: var(--pink-dark);
-  margin-top: 2px;
-}
-
-/* leaf divider */
-.leaf-divider {
-  width: 132px;
-  height: 20px;
-  margin: 13px auto 6px;
-  background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2020'%3E%3Cline%20x1='16'%20y1='10'%20x2='84'%20y2='10'%20stroke='%23a7bd93'%20stroke-width='1.2'/%3E%3Ccircle%20cx='50'%20cy='10'%20r='3'%20fill='%23d89aa0'/%3E%3Cellipse%20cx='32'%20cy='6'%20rx='6'%20ry='2.6'%20fill='%239caf88'%20transform='rotate(-22%2032%206)'/%3E%3Cellipse%20cx='32'%20cy='14'%20rx='6'%20ry='2.6'%20fill='%23a7bd93'%20transform='rotate(22%2032%2014)'/%3E%3Cellipse%20cx='68'%20cy='6'%20rx='6'%20ry='2.6'%20fill='%239caf88'%20transform='rotate(22%2068%206)'/%3E%3Cellipse%20cx='68'%20cy='14'%20rx='6'%20ry='2.6'%20fill='%23a7bd93'%20transform='rotate(-22%2068%2014)'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-
 .festive-deco {
   display: flex;
   align-items: flex-end;
@@ -338,11 +264,11 @@ body {
 .header h1 {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 38px;
+  font-size: 34px;
   line-height: 1.15;
-  letter-spacing: 0.09em;
-  color: var(--sage-dark);
-  margin: 6px 0 6px;
+  letter-spacing: 0.01em;
+  color: var(--pink-dark);
+  margin: 4px 0 8px;
 }
 
 .subtitle {
@@ -418,9 +344,8 @@ body {
 }
 .message-text {
   text-align: center;
-  font-size: 17px;
-  letter-spacing: 0.02em;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.65;
   color: var(--text-light);
   margin: 0;
 }
@@ -596,9 +521,8 @@ body {
 }
 
 .tl-text {
-  font-size: 14.5px;
-  letter-spacing: 0.015em;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.5;
   color: var(--text-light);
   margin: 0;
 }
@@ -632,7 +556,7 @@ body {
   font-weight: 700;
 }
 
-.event-value { font-size: 16px; color: var(--pink-dark); font-weight: 600; }
+.event-value { font-size: 16px; color: var(--text); font-weight: 600; }
 .event-sub { font-size: 14px; color: var(--text-light); }
 
 .event-actions {

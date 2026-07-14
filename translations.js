@@ -7,11 +7,10 @@
 const TRANSLATIONS = {
   ru: {
     header: {
-      title: "LIA & ELLIE",
+      flourish: "Приглашаем вас",
+      title: "Lia & Ellie",
       subtitle: "Первый день рождения",
-      invite1: "С большой радостью приглашаем вас",
-      invite2: "разделить с нами",
-      invite3: "этот особенный день"
+      intro: "Мы будем рады отпраздновать этот особенный день вместе с вами!"
     },
     rsvp_cta: "Подтвердить участие",
     message: {
