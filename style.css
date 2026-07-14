@@ -157,7 +157,7 @@ body {
 .section-title {
   font-family: var(--serif);
   text-align: center;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   color: var(--text);
   margin: 0 0 20px;
@@ -278,19 +278,19 @@ body {
   line-height: 1.55;
 }
 .invite-1 {
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 600;
   letter-spacing: 0.1em;
   color: var(--sage-dark);
   margin-top: 4px;
 }
 .invite-2 {
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 0.16em;
   color: var(--sage-dark);
 }
 .invite-3 {
-  font-size: 17px;
+  font-size: 18.5px;
   letter-spacing: 0.14em;
   color: var(--pink-dark);
   margin-top: 2px;
@@ -346,7 +346,7 @@ body {
 
 .subtitle {
   font-family: var(--serif);
-  font-size: 14px;
+  font-size: 15.5px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--terracotta);
@@ -365,7 +365,7 @@ body {
 .cta-rsvp {
   display: inline-block;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: #fff;
   background: var(--sage);
@@ -429,7 +429,7 @@ body {
 
 .date-month {
   font-family: var(--serif);
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--sage-dark);
@@ -475,7 +475,7 @@ body {
 
 .cal-weekdays span {
   text-align: center;
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--sage-dark);
   padding: 6px 0;
@@ -495,7 +495,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text);
 }
 
@@ -580,7 +580,7 @@ body {
 .tl-item:nth-child(even) .tl-body { text-align: right; }
 
 .tl-date {
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.03em;
   color: var(--terracotta);
   font-weight: 600;
@@ -588,14 +588,14 @@ body {
 
 .tl-title {
   font-family: var(--serif);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text);
   margin: 2px 0 4px;
 }
 
 .tl-text {
-  font-size: 14.5px;
+  font-size: 15px;
   letter-spacing: 0.015em;
   line-height: 1.55;
   color: var(--text-light);
@@ -624,15 +624,15 @@ body {
 .event-text { display: flex; flex-direction: column; }
 
 .event-label {
-  font-size: 12px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--sage-dark);
   font-weight: 700;
 }
 
-.event-value { font-size: 16px; color: var(--text); font-weight: 600; }
-.event-sub { font-size: 14px; color: var(--text-light); }
+.event-value { font-size: 17px; color: var(--text); font-weight: 600; }
+.event-sub { font-size: 15px; color: var(--text-light); }
 
 .event-actions {
   display: flex;
@@ -644,7 +644,7 @@ body {
 .map-btn {
   display: inline-block;
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   font-family: inherit;
   border-radius: 999px;
@@ -681,8 +681,8 @@ body {
 
 .rsvp-note {
   text-align: center;
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.55;
   color: var(--text);
   background: var(--sage-light);
   border-radius: 12px;
@@ -693,13 +693,13 @@ body {
 .rsvp-greeting {
   text-align: center;
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 600;
   color: var(--pink-dark);
   margin: 0 0 4px;
 }
 
-.rsvp-question { text-align: center; font-size: 15px; color: var(--text); margin: 0 0 14px; }
+.rsvp-question { text-align: center; font-size: 16.5px; color: var(--text); margin: 0 0 14px; }
 
 .rsvp-already {
   text-align: center;
@@ -716,7 +716,7 @@ body {
 .rsvp-btn {
   width: 100%;
   padding: 15px;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   border-radius: 12px;
   border: none;
@@ -738,7 +738,7 @@ body {
 .confirmation { text-align: center; padding: 24px 8px; }
 .teddy-emoji { font-size: 40px; line-height: 1; margin-bottom: 8px; }
 .confirmation h2 { font-family: var(--serif); color: var(--sage-dark); margin: 4px 0 12px; }
-.confirmation p { font-size: 15px; color: var(--text); line-height: 1.5; }
+.confirmation p { font-size: 16px; color: var(--text); line-height: 1.55; }
 
 /* ---- Clickable photos + lightbox ---- */
 .photo-slot img,
