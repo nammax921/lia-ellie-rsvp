@@ -360,7 +360,7 @@ function setupPetals() {
     "linear-gradient(160deg, #fbe0e8, #e79bb1)",
     "linear-gradient(160deg, #fff5f7, #f2b6c6)"
   ];
-  const COUNT = 26;
+  const COUNT = 10;
 
   for (let i = 0; i < COUNT; i++) {
     const petal = document.createElement("span");
