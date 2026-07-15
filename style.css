@@ -571,6 +571,8 @@ body {
   object-fit: cover;
 }
 
+/* keep photo + text on the SAME grid row (stops sparse packing pushing text down) */
+.tl-media, .tl-body { grid-row: 1; }
 /* alternate sides: odd = photo left / text right, even = text left / photo right */
 .tl-item:nth-child(odd) .tl-media { grid-column: 1; justify-self: start; }
 .tl-item:nth-child(odd) .tl-body { grid-column: 2; }
