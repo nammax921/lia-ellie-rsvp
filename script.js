@@ -322,21 +322,24 @@ function setupMusic() {
   audio.addEventListener("play", sync);
   audio.addEventListener("pause", sync);
 
-  // Autoplay with sound is blocked until the guest interacts, so kick it off on
-  // their first tap anywhere (except the button, which manages itself).
-  function startOnce(e) {
-    if (btn.contains(e.target)) return;
-    audio.play().catch(() => {});
-    stopAutoStart();
+  // Browsers block audio-with-sound until the visitor interacts, so we start it
+  // on the FIRST interaction of any kind (tap / scroll / key) — feels automatic.
+  const GESTURES = ["pointerdown", "touchstart", "keydown", "scroll"];
+  function startAuto(e) {
+    if (e && e.target && btn.contains(e.target)) return; // let the button manage itself
+    audio.play().then(clearGestures).catch(() => {});
   }
-  function stopAutoStart() {
-    document.removeEventListener("pointerdown", startOnce);
+  function clearGestures() {
+    GESTURES.forEach((ev) => window.removeEventListener(ev, startAuto, true));
   }
-  document.addEventListener("pointerdown", startOnce);
+  GESTURES.forEach((ev) => window.addEventListener(ev, startAuto, { capture: true, passive: true }));
 
-  // Once the guest uses the button, they're in control — stop auto-starting.
+  // Try to start right away (works on desktop / where the browser permits autoplay).
+  audio.play().then(clearGestures).catch(() => {});
+
+  // Once the guest uses the button, they're in control.
   btn.addEventListener("click", () => {
-    stopAutoStart();
+    clearGestures();
     if (audio.paused) audio.play().catch(() => {});
     else audio.pause();
   });
