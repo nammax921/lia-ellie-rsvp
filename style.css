@@ -171,6 +171,78 @@ body {
   margin-bottom: 36px;
 }
 
+/* ---- Full-bleed photo hero with overlaid, animated title ---- */
+.hero-photo {
+  position: relative;
+  margin: -40px -24px 24px;   /* bleed past the card padding to the edges */
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--sage-light);
+}
+.hero-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-photo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(50, 30, 34, 0.82) 0%, rgba(50, 30, 34, 0.45) 38%, transparent 100%);
+  pointer-events: none;
+}
+.hero-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 0 20px 28px;
+  text-align: center;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: #fff;
+  margin: 0 0 5px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+}
+.hero-title span {
+  display: inline-block;
+  opacity: 0;
+  animation: heroLetterIn 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+.hero-subtitle {
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  animation: heroSubIn 0.7s ease forwards;
+  animation-delay: 1.15s;
+}
+@keyframes heroLetterIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroSubIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-title span, .hero-subtitle { animation: none; opacity: 1; transform: none; }
+}
+
 .hero {
   position: relative;
   display: flex;
@@ -333,15 +405,7 @@ body {
   margin: 0 0 2px;
 }
 
-.header h1 {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 38px;
-  line-height: 1.15;
-  letter-spacing: 0.09em;
-  color: var(--pink-dark);
-  margin: 6px 0 6px;
-}
+/* (hero name is now .hero-title overlaid on the photo) */
 
 .subtitle {
   font-family: var(--serif);

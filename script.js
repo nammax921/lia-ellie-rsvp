@@ -420,6 +420,28 @@ function setupLightbox() {
   });
 }
 
+// ---- HERO TITLE: letter-by-letter reveal ----
+function animateHeroTitle() {
+  const el = document.querySelector(".hero-title");
+  if (!el) return;
+  const text = el.textContent;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  el.textContent = "";
+  let shown = 0;
+  [...text].forEach((ch) => {
+    const span = document.createElement("span");
+    span.textContent = ch === " " ? " " : ch;
+    if (!reduce && ch !== " ") {
+      span.style.animationDelay = (shown * 0.07) + "s";
+      shown++;
+    } else {
+      span.style.opacity = "1";
+      span.style.animation = "none";
+    }
+    el.appendChild(span);
+  });
+}
+
 // ---- SCROLL REVEAL ----
 function setupReveal() {
   const els = document.querySelectorAll(".reveal");
@@ -447,6 +469,7 @@ function setupReveal() {
   buildTimeline();
 
   renderText();
+  animateHeroTitle();
   setupMapButton();
   setupCTA();
   setupMusic();
