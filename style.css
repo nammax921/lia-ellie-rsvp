@@ -374,8 +374,7 @@ body {
   z-index: 0;
   pointer-events: none;
 }
-.corner-tr { display: none; } /* photo provides the top decoration now */
-.corner-bl { bottom: -18px; left: -20px; }
+.corner-tr, .corner-bl { display: none; } /* photo provides the decoration now */
 
 /* bunting garland */
 .bunting {
