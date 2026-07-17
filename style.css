@@ -168,13 +168,40 @@ body {
   position: relative;
   z-index: 1;
   text-align: center;
-  margin-bottom: 36px;
+  margin: -40px -24px 36px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  overflow: hidden;
+  background: #f5e3d0;
 }
 
-/* ---- Text-card hero (styled to match the invitation reference) ---- */
+/* full-bleed hero photo, floor blends into the cream text panel below */
+.hero-photo {
+  position: relative;
+  line-height: 0;
+}
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hero-photo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 32%;
+  background: linear-gradient(to bottom, rgba(245, 227, 208, 0) 0%, #f5e3d0 90%);
+  pointer-events: none;
+}
+
+/* ---- Text panel (styled to match the invitation reference) ---- */
 .hero-card {
+  position: relative;
+  background: linear-gradient(to bottom, #f5e3d0 0%, #f5e3d0 78%, #fffdfc 100%);
   text-align: center;
-  padding: 4px 2px 0;
+  padding: 2px 20px 34px;
+  margin-top: -1px;
 }
 .hero-eyebrow {
   font-family: var(--serif);
@@ -341,7 +368,7 @@ body {
   z-index: 0;
   pointer-events: none;
 }
-.corner-tr { top: -18px; right: -20px; transform: scaleX(-1); }
+.corner-tr { display: none; } /* photo provides the top decoration now */
 .corner-bl { bottom: -18px; left: -20px; }
 
 /* bunting garland */
