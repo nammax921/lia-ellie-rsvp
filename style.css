@@ -227,6 +227,12 @@ body {
   display: inline-block;
   opacity: 0;
   animation: heroLetterIn 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  /* rose-gold foil sheen (deeper rose top -> lighter warm rose bottom), sampled from the card */
+  background: linear-gradient(to bottom, #d3887e 0%, #da958c 48%, #e6aca2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .hero-title span.amp { font-weight: 400; }
 
