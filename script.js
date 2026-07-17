@@ -265,6 +265,7 @@ async function submitRsvp(btn) {
     if (res && res.ok) {
       confirmedAttending = attending;
       setRsvpState("confirmed");
+      if (attending === "yes") celebrate();
     } else {
       throw new Error(res && res.error ? res.error : "save_failed");
     }
@@ -274,6 +275,89 @@ async function submitRsvp(btn) {
     buttons.forEach((b) => (b.disabled = false));
     label.textContent = originalLabel;
   }
+}
+
+// ---- Celebration burst when a guest confirms "yes" ----
+function celebrate() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const canvas = document.createElement("canvas");
+  canvas.style.cssText =
+    "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999";
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function resize() {
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  const colors = ["#e0919b", "#cf9a92", "#c2a05f", "#d3887e", "#f6c9c0", "#e8c17a"];
+  const W = window.innerWidth;
+  const H = window.innerHeight;
+  const parts = [];
+  const N = W < 480 ? 70 : 110;
+  for (let i = 0; i < N; i++) {
+    parts.push({
+      x: W / 2 + (Math.random() - 0.5) * 120,
+      y: H * 0.42 + (Math.random() - 0.5) * 40,
+      vx: (Math.random() - 0.5) * 9,
+      vy: -7 - Math.random() * 8,
+      g: 0.15 + Math.random() * 0.07,
+      size: 6 + Math.random() * 9,
+      rot: Math.random() * Math.PI * 2,
+      vr: (Math.random() - 0.5) * 0.24,
+      color: colors[i % colors.length],
+      heart: Math.random() < 0.6
+    });
+  }
+
+  function heart(s) {
+    ctx.beginPath();
+    ctx.moveTo(0, s * 0.3);
+    ctx.bezierCurveTo(0, -s * 0.1, -s, -s * 0.05, -s, s * 0.35);
+    ctx.bezierCurveTo(-s, s * 0.75, -s * 0.35, s * 0.95, 0, s * 1.2);
+    ctx.bezierCurveTo(s * 0.35, s * 0.95, s, s * 0.75, s, s * 0.35);
+    ctx.bezierCurveTo(s, -s * 0.05, 0, -s * 0.1, 0, s * 0.3);
+    ctx.closePath();
+  }
+
+  const start = performance.now();
+  const DUR = 2800;
+  function frame(now) {
+    const t = now - start;
+    ctx.clearRect(0, 0, W, H);
+    const fade = t > DUR - 700 ? Math.max(0, (DUR - t) / 700) : 1;
+    parts.forEach((p) => {
+      p.vy += p.g;
+      p.vx *= 0.99;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      ctx.save();
+      ctx.globalAlpha = fade;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      if (p.heart) {
+        heart(p.size * 0.5);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-p.size * 0.4, -p.size * 0.4, p.size * 0.8, p.size * 0.55);
+      }
+      ctx.restore();
+    });
+    if (t < DUR) {
+      requestAnimationFrame(frame);
+    } else {
+      window.removeEventListener("resize", resize);
+      canvas.remove();
+    }
+  }
+  requestAnimationFrame(frame);
 }
 
 // ---- RSVP CTA (scrolls to the RSVP section) ----
