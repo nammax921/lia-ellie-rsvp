@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -57,21 +57,21 @@
     </svg>
 
     <header class="header reveal">
-      <div class="hero-photo">
-        <img src="photos/top.jpg" alt="Lia &amp; Ellie" onerror="this.remove()">
-        <div class="hero-overlay">
-          <h1 class="hero-title" data-i18n="header.title">LIA &amp; ELLIE</h1>
-          <p class="hero-subtitle" data-i18n="header.subtitle">Первый день рождения</p>
+      <div class="hero-card">
+        <p class="hero-eyebrow" data-i18n="header.eyebrow">Приглашение на праздник</p>
+        <h1 class="hero-title" data-i18n="header.title">LIA &amp; ELLIE</h1>
+        <p class="hero-script" data-i18n="header.script">1 годик</p>
+        <div class="hero-after">
+          <div class="hero-divider" aria-hidden="true">
+            <span class="hd-line"></span>
+            <svg class="hd-heart" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg"><path d="M16 27C4 18 2 11 7.5 7 11 4.3 15 7.5 16 9.4 17 7.5 21 4.3 24.5 7 30 11 28 18 16 27Z" fill="#e0919b"/></svg>
+            <span class="hd-line"></span>
+          </div>
+          <p class="hero-date" id="hero-date"></p>
+          <p class="hero-closing" data-i18n="header.closing">Будем очень рады разделить с вами этот особенный день!</p>
+          <button type="button" class="cta-rsvp" id="cta-rsvp" data-i18n="rsvp_cta">RSVP now</button>
         </div>
       </div>
-      <svg class="heart" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M16 27C4 18 2 11 7.5 7 11 4.3 15 7.5 16 9.4 17 7.5 21 4.3 24.5 7 30 11 28 18 16 27Z" fill="#e0919b"/>
-      </svg>
-      <p class="invite invite-1" data-i18n="header.invite1"></p>
-      <p class="invite invite-2" data-i18n="header.invite2"></p>
-      <p class="invite invite-3" data-i18n="header.invite3"></p>
-      <div class="leaf-divider" aria-hidden="true"></div>
-      <button type="button" class="cta-rsvp" id="cta-rsvp" data-i18n="rsvp_cta">RSVP now</button>
     </header>
 
     <!-- INVITATION MESSAGE: a photo (photos/message.jpg) + text -->

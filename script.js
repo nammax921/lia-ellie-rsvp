@@ -420,26 +420,58 @@ function setupLightbox() {
   });
 }
 
-// ---- HERO TITLE: letter-by-letter reveal ----
-function animateHeroTitle() {
-  const el = document.querySelector(".hero-title");
-  if (!el) return;
+// ---- HERO TITLE + SUBTITLE: letter-by-letter reveal, then fade in the
+// invitation copy once both finish (timing follows actual text length, so it
+// stays in sync even if the name or phrase changes).
+function splitIntoLetterSpans(el, letterDuration, letterStep, startDelay, reduce) {
+  if (!el) return startDelay;
   const text = el.textContent;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   el.textContent = "";
   let shown = 0;
+  // Spaces are appended as plain text nodes (not animated spans) — an
+  // isolated whitespace-only inline-block span can collapse to zero width in
+  // some browsers, which runs words together.
   [...text].forEach((ch) => {
+    if (ch === " ") {
+      el.appendChild(document.createTextNode(" "));
+      return;
+    }
     const span = document.createElement("span");
-    span.textContent = ch === " " ? " " : ch;
-    if (!reduce && ch !== " ") {
-      span.style.animationDelay = (shown * 0.07) + "s";
-      shown++;
+    span.textContent = ch;
+    if (ch === "&") span.classList.add("amp");
+    if (!reduce) {
+      span.style.animationDelay = (startDelay + shown * letterStep) + "s";
     } else {
       span.style.opacity = "1";
       span.style.animation = "none";
     }
+    shown++;
     el.appendChild(span);
   });
+  if (reduce) return startDelay;
+  return startDelay + Math.max(shown - 1, 0) * letterStep + letterDuration;
+}
+
+function animateHeroTitle() {
+  const titleEl = document.querySelector(".hero-title");
+  const scriptEl = document.querySelector(".hero-script");
+  const afterEl = document.querySelector(".hero-after");
+  const dateEl = document.getElementById("hero-date");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (dateEl) {
+    const d = CONFIG.EVENT_DATE;
+    const pad = (n) => String(n).padStart(2, "0");
+    dateEl.textContent = pad(d.day) + "." + pad(d.month) + "." + d.year;
+  }
+
+  const titleEnd = splitIntoLetterSpans(titleEl, 0.55, 0.07, 0.25, reduce);
+  const scriptEnd = splitIntoLetterSpans(scriptEl, 0.5, 0.05, titleEnd + 0.15, reduce);
+
+  if (afterEl) {
+    if (reduce) afterEl.style.opacity = "1";
+    else afterEl.style.animationDelay = (scriptEnd + 0.2) + "s";
+  }
 }
 
 // ---- SCROLL REVEAL ----
