@@ -237,12 +237,12 @@ body {
 .hero-title span.amp { font-weight: 400; }
 
 .hero-script {
-  font-family: "Caveat", var(--serif);
-  font-size: 46px;
-  font-weight: 700;
-  line-height: 1;
+  font-family: "Marck Script", cursive;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.1;
   color: #c2a05f;
-  margin: 0;
+  margin: 2px 0 0;
 }
 .hero-script span {
   display: inline-block;
